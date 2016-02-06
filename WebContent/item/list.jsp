@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>收支项目管理</title>
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" type="text/JavaScript" src="../js/common.js"></script>
@@ -15,8 +17,9 @@
         <tr valign="top">
           <td>【 收支项目管理 】 (父项目名称)</td>
           <td align="right">
-          <a href="addTopItem.jsp"  onMouseOver="MM_swapImage('Image1','','../images/index_15_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image1','','../images/index_15_2.gif',1)" onMouseUp="MM_swapImage('Image1','','../images/index_15_1.gif',1)"><img src="../images/index_15_0.gif" width="85" height="24" border="0" align="top" id="Image1"></a>&nbsp;&nbsp;
-          <a href="add.html" target="mainframe" onMouseOver="MM_swapImage('Image2','','../images/index_14_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image2','','../images/index_14_2.gif',1)" onMouseUp="MM_swapImage('Image2','','../images/index_15_1.gif',1)"><img src="../images/index_14_0.gif" width="85" height="24" border="0" align="top" id="Image2"></a>&nbsp;&nbsp;<a href="#" target="mainframe" onMouseOver="MM_swapImage('Image3','','../images/index_13_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image3','','../images/index_13_2.gif',1)" onMouseUp="MM_swapImage('Image3','','../images/index_13_1.gif',1)"><img src="../images/index_13_0.gif" id="Image3" width="75" height="24" border="0"></a>
+          <a href="add.jsp"  onMouseOver="MM_swapImage('Image1','','../images/index_15_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image1','','../images/index_15_2.gif',1)" onMouseUp="MM_swapImage('Image1','','../images/index_15_1.gif',1)"><img src="../images/index_15_0.gif" width="85" height="24" border="0" align="top" id="Image1"></a>&nbsp;&nbsp;
+          <a href="add1.jsp"  onMouseOver="MM_swapImage('Image2','','../images/index_14_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image2','','../images/index_14_2.gif',1)" onMouseUp="MM_swapImage('Image2','','../images/index_15_1.gif',1)"><img src="../images/index_14_0.gif" width="85" height="24" border="0" align="top" id="Image2"></a>&nbsp;&nbsp;
+          <a href="#"   onMouseOver="MM_swapImage('Image3','','../images/index_13_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image3','','../images/index_13_2.gif',1)" onMouseUp="MM_swapImage('Image3','','../images/index_13_1.gif',1)"><img src="../images/index_13_0.gif" id="Image3" width="75" height="24" border="0"></a>
 		  </td>
         </tr>
       </table></td>
@@ -31,6 +34,25 @@
         <td width="20%" class="text007">项目名称 </td>
         <td width="30%" class="text007">操作</td>
       </tr>
+      
+      <c:forEach var='type' items='${limitAcconut}'>
+      <tr>
+      	<c:out value="type"></c:out>
+      </tr>
+      </c:forEach>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <tr align="center">
         <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
         <td>支出</td>
