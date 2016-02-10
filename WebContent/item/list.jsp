@@ -6,8 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>收支项目管理</title>
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script language="JavaScript" type="text/JavaScript" src="../js/common.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript" src="js/common.js"></script>
+<script type="text/javascript">
+
+</script>
 </head>
 
 <body topmargin="0" leftmargin="0">
@@ -17,9 +20,9 @@
         <tr valign="top">
           <td>【 收支项目管理 】 (父项目名称)</td>
           <td align="right">
-          <a href="add.jsp"  onMouseOver="MM_swapImage('Image1','','../images/index_15_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image1','','../images/index_15_2.gif',1)" onMouseUp="MM_swapImage('Image1','','../images/index_15_1.gif',1)"><img src="../images/index_15_0.gif" width="85" height="24" border="0" align="top" id="Image1"></a>&nbsp;&nbsp;
-          <a href="add1.jsp"  onMouseOver="MM_swapImage('Image2','','../images/index_14_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image2','','../images/index_14_2.gif',1)" onMouseUp="MM_swapImage('Image2','','../images/index_15_1.gif',1)"><img src="../images/index_14_0.gif" width="85" height="24" border="0" align="top" id="Image2"></a>&nbsp;&nbsp;
-          <a href="#"   onMouseOver="MM_swapImage('Image3','','../images/index_13_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image3','','../images/index_13_2.gif',1)" onMouseUp="MM_swapImage('Image3','','../images/index_13_1.gif',1)"><img src="../images/index_13_0.gif" id="Image3" width="75" height="24" border="0"></a>
+          <a href="add.jsp"  onMouseOver="MM_swapImage('Image1','','images/index_15_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image1','','images/index_15_2.gif',1)" onMouseUp="MM_swapImage('Image1','','images/index_15_1.gif',1)"><img src="images/index_15_0.gif" width="85" height="24" border="0" align="top" id="Image1"></a>&nbsp;&nbsp;
+          <a href="add1.jsp"  onMouseOver="MM_swapImage('Image2','','images/index_14_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image2','','images/index_14_2.gif',1)" onMouseUp="MM_swapImage('Image2','','images/index_15_1.gif',1)"><img src="images/index_14_0.gif" width="85" height="24" border="0" align="top" id="Image2"></a>&nbsp;&nbsp;
+          <a href="#"   onMouseOver="MM_swapImage('Image3','','images/index_13_1.gif',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Image3','','images/index_13_2.gif',1)" onMouseUp="MM_swapImage('Image3','','images/index_13_1.gif',1)"><img src="images/index_13_0.gif" id="Image3" width="75" height="24" border="0"></a>
 		  </td>
         </tr>
       </table></td>
@@ -36,8 +39,14 @@
       </tr>
       
       <c:forEach var='type' items='${limitAcconut}'>
-      <tr>
-      	<c:out value="type"></c:out>
+       <tr align="center">
+        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
+        
+        <td><c:out   value='${type.accountSuperType.incomeToExpensesType.incomeExpenName}'></c:out>    </td>
+        <td align="left" align="center"><a href="/familyaccount/DetailAccountTypeServlet?id=${type.accountSubTypeID }" ><c:out value='${type.accountSubTypeName}'></c:out>     </a></td>
+        <td><a href="/familyaccount/DetailAccountTypeServlet?id=${type.accountSubTypeID }" ><img src="images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"></a>
+        	<a href="/familyaccount/EditAccountTypeServlet?id=${type.accountSubTypeID }"><img src="images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"></a>
+        	<a href="#"><img src="images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></a></td>
       </tr>
       </c:forEach>
       
@@ -53,44 +62,8 @@
       
       
       
-      <tr align="center">
-        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
-        <td>支出</td>
-        <td align="left"><a href="list.html">交通</a></td>
-        <td><a href="detail.html"><img src="../images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"></a>
-        	<a href="edit.html"><img src="../images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"></a><img src="../images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></td>
-      </tr>
-         <tr align="center" class="bg04">
-        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
-        <td>支出</td>
-        <td align="left"><a href="list.html">保养费</a></td>
-        <td><a href="detail.html"><img src="../images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"></a>
-        	<a href="edit.html"><img src="../images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"></a><img src="../images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></td>
-      </tr>
-          <tr align="center">
-        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
-        <td>支出</td>
-        <td align="left">修理费</td>  
-        <td><img src="../images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"><img src="../images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"><img src="../images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></td>
-      </tr>
-        <tr align="center"class="bg04">
-        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
-        <td>收入</td>
-        <td align="left">薪资收入</td>        
-        <td><img src="../images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"><img src="../images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"><img src="../images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></td>
-      </tr>
-         <tr align="center">
-        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
-        <td>收入</td>
-        <td align="left">其他收入</td>        
-        <td><img src="../images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"><img src="../images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"><img src="../images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></td>
-      </tr>
-          <tr align="center"class="bg04">
-        <td height="35"><input type="checkbox" name="checkbox" value="checkbox"></td>
-        <td>收入</td>
-        <td align="left">品牌销售</td>
-        <td><img src="../images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"><img src="../images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"><img src="../images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></td>
-      </tr>
+     
+         
         
 
     </table>

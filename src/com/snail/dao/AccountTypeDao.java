@@ -47,6 +47,69 @@ public class AccountTypeDao {
 
 	/**
 	 * 
+	 * getAccountSubTypeDao:(通过ID 查询对应的账单子类型)<br/>
+	
+	 *
+	 * @param  @param sub_bt_id
+	 * @param  @return    设定文件
+	 * @return AccountSubType    DOM对象
+	 * @throws 
+	 * @since  CodingExample　Ver 1.1
+	 */
+	public AccountSubType getAccountSubTypeDao(int sub_bt_id) {
+		Connection conn = DBconnection.getConnection();
+		ResultSet query=null;
+		PreparedStatement statement=null;
+		try {
+			String sql = "select * from sub_bill_type where sub_bt_id=?";
+			statement = conn.prepareStatement(sql);
+			
+			statement.setInt(1, sub_bt_id);
+			query = statement.executeQuery();
+			AccountSubType accountSubType  = new AccountSubType();
+			if (query.next()) {
+				
+				// 得到子类型的ID号
+				accountSubType.setAccountSubTypeID(query.getInt("sub_bt_id"));
+				// 得到父类型的id然后通过geAccountSuperType方法得到父类型的对象
+				int by_id = query.getInt("by_id");
+				AccountSuperType accountSuperType = getAccountSuperType(by_id);
+				accountSubType.setAccountSuperType(accountSuperType);
+				// 得到子类型的名字
+				accountSubType.setAccountSubTypeName(query.getString("sub_bt_name"));
+
+				
+			}
+			return accountSubType;
+		} catch (SQLException e) {
+
+			//
+			e.printStackTrace();
+			return null;
+
+		} finally {
+			if (conn != null && query != null) {
+				try {
+					conn.close();
+					query.close();
+					statement.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+
+				}
+
+			}
+		}
+
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 
 	 * getLimitAccountSubTypeDao:(分页查询全部的子类型账单)<br/>
 	 *
 	 * 
@@ -75,7 +138,6 @@ public class AccountTypeDao {
 				accountSubType.setAccountSubTypeID(query.getInt("sub_bt_id"));
 				// 得到父类型的id然后通过geAccountSuperType方法得到父类型的对象
 				int by_id = query.getInt("by_id");
-				System.out.println(by_id);
 				AccountSuperType accountSuperType = getAccountSuperType(by_id);
 				accountSubType.setAccountSuperType(accountSuperType);
 				// 得到子类型的名字
@@ -159,6 +221,118 @@ public class AccountTypeDao {
 
 	}
 
+	/**
+	 * 
+	 * getAllAccountSuperType:(查询全部的父类型的数据,并通过list集合返回)<br/>
+	 * TODO(这里描述这个方法适用条件 – 可选)<br/>
+	 * TODO(这里描述这个方法的执行流程 – 可选)<br/>
+	 * TODO(这里描述这个方法的使用方法 – 可选)<br/>
+	 * TODO(这里描述这个方法的注意事项 – 可选)<br/>
+	 *
+	 * @param  @return    设定文件
+	 * @return List<AccountSuperType>    DOM对象
+	 * @throws 
+	 * @since  CodingExample　Ver 1.1
+	 */
+	public List<AccountSuperType> getAllAccountSuperType() {
+		Connection conn = DBconnection.getConnection();
+		ResultSet executeQuery = null;
+		try {
+			Statement createStatement = conn.createStatement();
+			String sql = "select * from bill_type ;";
+			executeQuery = createStatement.executeQuery(sql);
+			List<AccountSuperType> list = new ArrayList<>();
+			AccountSuperType accountSuperType = null;
+			while (executeQuery.next()) {
+				accountSuperType = new AccountSuperType();
+				accountSuperType.setAccountSuperTypeID(executeQuery.getInt("by_id"));
+				accountSuperType.setAccountSuperTypeName(executeQuery.getString("by_name"));
+				// 查询数据库得到收支类型对象
+				int in_ex_id = executeQuery.getInt("in_ex_id");
+				IncomeToExpensesType incomeToExpenses = getIncomeToExpenses(in_ex_id);
+				accountSuperType.setIncomeToExpensesType(incomeToExpenses);
+				list.add(accountSuperType);
+			}
+			return list;
+
+		} catch (SQLException e) {
+
+			//
+			e.printStackTrace();
+			return null;
+
+		} finally {
+			if (conn != null && executeQuery != null) {
+				try {
+					conn.close();
+					executeQuery.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+
+				}
+
+			}
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 * getAllIncomeToExpenses:(查村所有的收支类型,并用list集合返回)<br/>
+	 *
+	 * @param  @return    设定文件
+	 * @return List<IncomeToExpensesType>    DOM对象
+	 * @throws 
+	 * @since  CodingExample　Ver 1.1
+	 */
+	public  List<IncomeToExpensesType> getAllIncomeToExpenses() {
+		Connection conn = DBconnection.getConnection();
+		ResultSet query = null;
+		try {
+			Statement statement = conn.createStatement();
+			String sql = "select * from income_and_expenses ;";
+			query = statement.executeQuery(sql);
+			List<IncomeToExpensesType> list = new ArrayList<>();
+			IncomeToExpensesType incomeToExpensesType = null;
+			while (query.next()) {
+				incomeToExpensesType = new IncomeToExpensesType();
+				incomeToExpensesType.setIncomeExpenID(query.getInt("in_ex_id"));
+				incomeToExpensesType.setIncomeExpenName(query.getString("in_ex_name"));
+				list.add(incomeToExpensesType);
+			}
+			return list;
+		} catch (SQLException e) {
+
+			//
+			e.printStackTrace();
+			return null;
+
+		} finally {
+			if (conn != null && query != null) {
+				try {
+					conn.close();
+					query.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+
+				}
+
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * getIncomeToExpenses:(获取数据库里面收支收支类型数据)<br/>

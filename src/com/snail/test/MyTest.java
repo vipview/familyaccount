@@ -19,6 +19,8 @@ import org.junit.Test;
 
 import com.snail.dao.AccountTypeDao;
 import com.snail.entity.AccountSubType;
+import com.snail.entity.AccountSuperType;
+import com.snail.entity.IncomeToExpensesType;
 
 /**
  * ClassName:Test<br/>
@@ -34,7 +36,7 @@ import com.snail.entity.AccountSubType;
 
  */
 public class MyTest {
-	@Test
+	
 	public void test(){
 		AccountTypeDao dao = new AccountTypeDao();
 		List<AccountSubType> limitAccountSubTypeDao = dao.getLimitAccountSubTypeDao(0, 20);
@@ -46,6 +48,20 @@ public class MyTest {
 			System.out.println();
 		}
 		
+	}
+	@Test
+	public void testAllSuperAccount(){
+		AccountTypeDao dao = new AccountTypeDao();
+		List<AccountSuperType> allAccountSuperType = dao.getAllAccountSuperType();
+		for (AccountSuperType accountSuperType : allAccountSuperType) {
+			System.out.print(accountSuperType.getAccountSuperTypeName()+"\t");
+			
+		}
+		System.out.println();
+		List<IncomeToExpensesType> allIncomeToExpenses = dao.getAllIncomeToExpenses();
+		for (IncomeToExpensesType incomeToExpensesType : allIncomeToExpenses) {
+			System.out.print(incomeToExpensesType.getIncomeExpenName()+"\t");
+		}
 	}
 	
 	

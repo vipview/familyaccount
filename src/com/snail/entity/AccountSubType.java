@@ -28,7 +28,8 @@ package com.snail.entity;
 public class AccountSubType {
 	int accountSubTypeID=0;
 	AccountSuperType accountSuperType = null;
-	String AccountSubTypeName = null;
+	String accountSubTypeName = null;
+	
 	public AccountSubType() {
 
 		// 
@@ -47,16 +48,16 @@ public class AccountSubType {
 		this.accountSuperType = accountSuperType;
 	}
 	public String getAccountSubTypeName() {
-		return AccountSubTypeName;
+		return accountSubTypeName;
 	}
 	public void setAccountSubTypeName(String accountSubTypeName) {
-		AccountSubTypeName = accountSubTypeName;
+		this.accountSubTypeName = accountSubTypeName;
 	}
 	public AccountSubType(int accountSubTypeID, AccountSuperType accountSuperType, String accountSubTypeName) {
 		super();
 		this.accountSubTypeID = accountSubTypeID;
 		this.accountSuperType = accountSuperType;
-		AccountSubTypeName = accountSubTypeName;
+		this.accountSubTypeName = accountSubTypeName;
 	}
 }
 

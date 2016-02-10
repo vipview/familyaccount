@@ -11,27 +11,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.snail.entity.AccountSubType;
 import com.snail.entity.AccountSuperType;
+import com.snail.entity.IncomeToExpensesType;
 import com.snail.service.GetAccountType;
 
 /**
- * Servlet implementation class ListAccountTypeServlet
+ * Servlet implementation class EditAccountTypeServlet
  */
-@WebServlet("/ListAccountTypeServlet")
-public class ListAccountTypeServlet extends HttpServlet {
+@WebServlet("/EditAccountTypeServlet")
+public class EditAccountTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//调用服务层里面的方法,得到账单类型的全部数据
-		GetAccountType  accountType = new GetAccountType();
-		List<AccountSubType> limitAccountSubType = accountType.getLimitAccountSubType(0, 10);
-		request.setAttribute("limitAcconut", limitAccountSubType);
-		request.getRequestDispatcher("/item/list.jsp").forward(request, response);
+		//先查出对应项的数据
+		String parameter = request.getParameter("id");
+		
+		GetAccountType accountType = new GetAccountType();
+		
+		AccountSubType subType = accountType.getAccountSubType(Integer.parseInt(parameter));
+		request.setAttribute("subtype", subType);
+		
+		List<AccountSuperType> superType = accountType.getAllAccountSuperType();
+		request.setAttribute("allSuperType", superType);
+		
+		List<IncomeToExpensesType> allIncomeToExpensesType = accountType.getAllIncomeToExpensesType();
+		request.setAttribute("allIncomeToExpense", allIncomeToExpensesType);
+		
+		request.getRequestDispatcher("/item/edit.jsp").forward(request, response);
 		
 		
-		//通过请求转发把数据传给jsp页面
+		
+		//然后查询所有的收支类型
+		//然后查询所有的父类型
 	}
 
 	/**
