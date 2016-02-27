@@ -46,7 +46,7 @@
         <td align="left" align="center"><a href="/familyaccount/DetailAccountTypeServlet?id=${type.accountSubTypeID }" ><c:out value='${type.accountSubTypeName}'></c:out>     </a></td>
         <td><a href="/familyaccount/DetailAccountTypeServlet?id=${type.accountSubTypeID }" ><img src="images/icon_resault.gif" alt="查 看" width="12" height="15" hspace="10" border="0"></a>
         	<a href="/familyaccount/EditAccountTypeServlet?id=${type.accountSubTypeID }"><img src="images/icon_set.gif" alt="编 辑" width="14" height="15" border="0"></a>
-        	<a href="#"><img src="images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></a></td>
+        	<a href="/familyaccount/DeleteTypeServlet?id=${type.accountSubTypeID }"><img src="images/delete.gif" alt="删 除" width="13" height="16" hspace="10"></a></td>
       </tr>
       </c:forEach>
       

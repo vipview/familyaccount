@@ -10,9 +10,24 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" type="text/JavaScript" src="js/common.js"></script>
 <script type="text/javascript">
-function myform(){
-	alert("再到李开复离职的恐惧");
-}
+// function myshow(){
+// 	var name = document.getElementById("inex").value;
+// 	var superType = document.getElementById("superType").value;
+// 	var req = new XMLHttpRequest();
+// 	req.onreadystatechange=function(){
+// 		if(req.readyState==4&&req.status==200){
+// 			alert('ok');
+// 		}
+		
+		
+		
+// 	}
+// 	req.open("get", '/familyaccount/EditAccountShowServlet?id='+name, true)	
+	
+// 	req.send(null);
+	
+// 	alert(name+"======"+superType);
+// }
 
 </script>
 </head>

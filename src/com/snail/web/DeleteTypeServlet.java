@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.snail.service.GetAccountType;
+
 /**
- * Servlet implementation class EditAccountShowServlet
+ * Servlet implementation class DeleteTypeServlet
  */
-@WebServlet("/EditAccountShowServlet")
-public class EditAccountShowServlet extends HttpServlet {
+@WebServlet("/DeleteTypeServlet")
+public class DeleteTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,7 +21,11 @@ public class EditAccountShowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		//删除对应的条目
+		String parameter = request.getParameter("id");
+		GetAccountType accountType = new GetAccountType();
+		accountType.delSubType(parameter);
+		request.getRequestDispatcher("/ListAccountTypeServlet").forward(request, response);
 	}
 
 	/**

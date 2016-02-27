@@ -45,30 +45,75 @@ public class AccountTypeDao {
 
 	}
 
+	public List<AccountSuperType> querySuperTypeByInexID(String inexID) {
+		Connection conn = DBconnection.getConnection();
+		Statement statement=null;
+		try {
+			statement = conn.createStatement();
+			String sql="select * from bill_type where in_ex_id=;"+inexID;
+			ResultSet query = statement.executeQuery(sql);
+			List<AccountSuperType> list = new ArrayList<>();
+			AccountSuperType accountSuperType = null;
+			while(query.next()){
+				accountSuperType = new AccountSuperType();
+				accountSuperType.setAccountSuperTypeID(query.getInt("by_id"));
+				accountSuperType.setAccountSuperTypeName(query.getString("by_name"));
+				// 查询数据库得到收支类型对象
+				int in_ex_id = query.getInt("in_ex_id");
+				IncomeToExpensesType incomeToExpenses = getIncomeToExpenses(in_ex_id);
+				accountSuperType.setIncomeToExpensesType(incomeToExpenses);
+				
+				list.add(accountSuperType);
+			}
+			return list;
+		} catch (SQLException e) {
+
+			//
+			e.printStackTrace();
+			return null;
+
+		}finally {
+			if(conn!=null&&statement!=null){
+				try {
+					conn.close();
+					statement.close();
+				} catch (SQLException e) {
+					
+					//
+					e.printStackTrace();
+					
+				}
+			}
+		}
+
+	}
+
 	/**
 	 * 
 	 * getAccountSubTypeDao:(通过ID 查询对应的账单子类型)<br/>
-	
 	 *
-	 * @param  @param sub_bt_id
-	 * @param  @return    设定文件
-	 * @return AccountSubType    DOM对象
-	 * @throws 
-	 * @since  CodingExample　Ver 1.1
+	 * 
+	 * @param @param
+	 *            sub_bt_id
+	 * @param @return
+	 *            设定文件
+	 * @return AccountSubType DOM对象
+	 * @throws @since
+	 *             CodingExample Ver 1.1
 	 */
 	public AccountSubType getAccountSubTypeDao(int sub_bt_id) {
 		Connection conn = DBconnection.getConnection();
-		ResultSet query=null;
-		PreparedStatement statement=null;
+		ResultSet query = null;
+		PreparedStatement statement = null;
 		try {
 			String sql = "select * from sub_bill_type where sub_bt_id=?";
 			statement = conn.prepareStatement(sql);
-			
+
 			statement.setInt(1, sub_bt_id);
 			query = statement.executeQuery();
-			AccountSubType accountSubType  = new AccountSubType();
+			AccountSubType accountSubType = new AccountSubType();
 			if (query.next()) {
-				
+
 				// 得到子类型的ID号
 				accountSubType.setAccountSubTypeID(query.getInt("sub_bt_id"));
 				// 得到父类型的id然后通过geAccountSuperType方法得到父类型的对象
@@ -78,7 +123,6 @@ public class AccountTypeDao {
 				// 得到子类型的名字
 				accountSubType.setAccountSubTypeName(query.getString("sub_bt_name"));
 
-				
 			}
 			return accountSubType;
 		} catch (SQLException e) {
@@ -103,11 +147,7 @@ public class AccountTypeDao {
 		}
 
 	}
-	
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * getLimitAccountSubTypeDao:(分页查询全部的子类型账单)<br/>
@@ -122,8 +162,8 @@ public class AccountTypeDao {
 	 */
 	public List<AccountSubType> getLimitAccountSubTypeDao(int page, int num) {
 		Connection conn = DBconnection.getConnection();
-		ResultSet query=null;
-		PreparedStatement statement=null;
+		ResultSet query = null;
+		PreparedStatement statement = null;
 		try {
 			String sql = "select * from sub_bill_type limit ?,?";
 			statement = conn.prepareStatement(sql);
@@ -229,10 +269,11 @@ public class AccountTypeDao {
 	 * TODO(这里描述这个方法的使用方法 – 可选)<br/>
 	 * TODO(这里描述这个方法的注意事项 – 可选)<br/>
 	 *
-	 * @param  @return    设定文件
-	 * @return List<AccountSuperType>    DOM对象
-	 * @throws 
-	 * @since  CodingExample　Ver 1.1
+	 * @param @return
+	 *            设定文件
+	 * @return List<AccountSuperType> DOM对象
+	 * @throws @since
+	 *             CodingExample Ver 1.1
 	 */
 	public List<AccountSuperType> getAllAccountSuperType() {
 		Connection conn = DBconnection.getConnection();
@@ -276,22 +317,18 @@ public class AccountTypeDao {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * getAllIncomeToExpenses:(查村所有的收支类型,并用list集合返回)<br/>
 	 *
-	 * @param  @return    设定文件
-	 * @return List<IncomeToExpensesType>    DOM对象
-	 * @throws 
-	 * @since  CodingExample　Ver 1.1
+	 * @param @return
+	 *            设定文件
+	 * @return List<IncomeToExpensesType> DOM对象
+	 * @throws @since
+	 *             CodingExample Ver 1.1
 	 */
-	public  List<IncomeToExpensesType> getAllIncomeToExpenses() {
+	public List<IncomeToExpensesType> getAllIncomeToExpenses() {
 		Connection conn = DBconnection.getConnection();
 		ResultSet query = null;
 		try {
@@ -327,12 +364,7 @@ public class AccountTypeDao {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * getIncomeToExpenses:(获取数据库里面收支收支类型数据)<br/>
@@ -345,7 +377,7 @@ public class AccountTypeDao {
 	 * @throws @since
 	 *             CodingExample Ver 1.1
 	 */
-	public  IncomeToExpensesType getIncomeToExpenses(int IncomeToExpensesID) {
+	public IncomeToExpensesType getIncomeToExpenses(int IncomeToExpensesID) {
 		Connection conn = DBconnection.getConnection();
 		ResultSet query = null;
 		try {
@@ -377,6 +409,47 @@ public class AccountTypeDao {
 
 			}
 		}
+	}
+	/**
+	 * 
+	 * deleteSubType:(删除对应的账单子项目)<br/>
+	 * @param      设定文件
+	 * @return void    DOM对象
+	 * @throws 
+	 * @since  CodingExample　Ver 1.1
+	 */
+	public void deleteSubType(String id) {
+		Connection conn = DBconnection.getConnection();
+		Statement statement=null;
+		try {
+			statement = conn.createStatement();
+			String sql="delete from sub_bill_type where sub_bt_id="+id;
+			statement.executeUpdate(sql);
+			
+			
+			
+			
+		} catch (SQLException e) {
+			
+			//
+			e.printStackTrace();
+			
+		}finally {
+			if(conn!=null&&statement!=null){
+				try {
+					conn.close();
+					statement.close();
+				} catch (SQLException e) {
+					
+					//
+					e.printStackTrace();
+					
+				}
+			}
+		}
+		
+		
+		
 	}
 
 }

@@ -71,22 +71,22 @@ public class GetAccountType {
 		// 这里需要得到是属于支出还是属于收入
 		// 考虑返回的的参数(返回是那个实体对象)
 		AccountTypeDao dao = new AccountTypeDao();
-//以下注释部分表示去掉list集合里面字符串重复的元素
-//		List<AccountSuperType> allAccountSuperType = dao.getAllAccountSuperType();
-		
-		
-		//		for  ( int  i  =   0 ; i  <  allAccountSuperType.size()  -   1 ; i ++ )   { 
-//		    for  ( int  j  =  allAccountSuperType.size()  -   1 ; j  >  i; j -- )   { 
-//		      if  (allAccountSuperType.get(j).getAccountSuperTypeName().
-//		    		  equals(allAccountSuperType.get(i).getAccountSuperTypeName()))   { 
-//		    	  allAccountSuperType.remove(j); 
-//		      } 
-//		    } 
-//		  } 
-//		for (AccountSuperType accountSuperType : allAccountSuperType) {
-//			System.out.println(accountSuperType.getAccountSuperTypeName());
-//			System.out.println("1");
-//		}
+		// 以下注释部分表示去掉list集合里面字符串重复的元素
+		// List<AccountSuperType> allAccountSuperType =
+		// dao.getAllAccountSuperType();
+
+		// for ( int i = 0 ; i < allAccountSuperType.size() - 1 ; i ++ ) {
+		// for ( int j = allAccountSuperType.size() - 1 ; j > i; j -- ) {
+		// if (allAccountSuperType.get(j).getAccountSuperTypeName().
+		// equals(allAccountSuperType.get(i).getAccountSuperTypeName())) {
+		// allAccountSuperType.remove(j);
+		// }
+		// }
+		// }
+		// for (AccountSuperType accountSuperType : allAccountSuperType) {
+		// System.out.println(accountSuperType.getAccountSuperTypeName());
+		// System.out.println("1");
+		// }
 		return dao.getAllAccountSuperType();
 	}
 
@@ -175,4 +175,27 @@ public class GetAccountType {
 
 	}
 
+	/**
+	 * 
+	 * getAccountSuperTypeByInexID:(通过收入类型的id 查找父类型的里面属于该收入类型的选项)<br/>
+	 *
+	 * @param @param
+	 *            inexID
+	 * @param @return
+	 *            设定文件
+	 * @return List<AccountSuperType> DOM对象
+	 * @throws @since
+	 *             CodingExample Ver 1.1
+	 */
+	public List<AccountSuperType> getAccountSuperTypeByInexID(String inexID) {
+
+		AccountTypeDao dao = new AccountTypeDao();
+		return dao.querySuperTypeByInexID(inexID);
+	}
+
+	public void delSubType(String id) {
+		AccountTypeDao dao = new AccountTypeDao();
+		dao.deleteSubType(id);
+		
+	}
 }
